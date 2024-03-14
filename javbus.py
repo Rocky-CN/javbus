@@ -1,17 +1,22 @@
 import requests, json, time, os, sys
 sys.path.append('.')
 requests.packages.urllib3.disable_warnings()
-try:
-    from pusher import pusher
-except:
-    pass
-try:
-    from bs4 import BeautifulSoup
-except:
-    pass
 from lxml import etree
 
 cookie = os.environ.get("cookie_javbus")
+
+def send_serverchan(title):
+    url = "https://sc.ftqq.com/" + os.environ.get('key_serverchan') + ".send"
+
+    data = {
+        "text": title,
+    }
+
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
+        print("消息发送成功！")
+    else:
+        print("消息发送失败，状态码: {}".format(response.status_code))
 
 def run(*arg):
     msg = ""
@@ -42,8 +47,8 @@ def run(*arg):
             data = h.xpath('//tr/td[6]/text()')
             msg += f'签到成功或今日已签到,最后签到时间:{data[0]}'
         else:
-            msg += '签到失败,可能是cookie失效了!'
-            pusher(msg)
+            msg += 'javbus签到失败,可能是cookie失效了!'
+            send_serverchan(msg)
     except:
         if '失败' in msg:
             pass
