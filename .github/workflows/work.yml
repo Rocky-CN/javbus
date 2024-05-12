@@ -18,8 +18,8 @@ jobs:
       - name: requirements
         run : pip3 install -r requirements.txt
               
-      - name: Workflow Keepalive
-        uses: liskin/gh-workflow-keepalive@v1.1.0
+      # - name: Workflow Keepalive
+      #   uses: liskin/gh-workflow-keepalive@v1.1.0
               
       - name: main
         env:
