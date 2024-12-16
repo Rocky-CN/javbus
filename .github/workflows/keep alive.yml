@@ -1,7 +1,7 @@
-name: Keep Alive 
+name: keep alive 
 on:
     workflow_run:
-      workflows: ["work"]  # 指定主工作流名
+      workflows: ["run"]  # 指定主工作流名
       types:
         - completed  # 主工作流完成后触发
 jobs:
